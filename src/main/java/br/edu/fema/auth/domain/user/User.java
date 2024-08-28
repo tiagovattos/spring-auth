@@ -20,7 +20,7 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String login;
+    private String username;
     private String password;
     private String email;
     private UserRole role;
@@ -32,11 +32,6 @@ public class User implements UserDetails {
         } else {
             return List.of(new SimpleGrantedAuthority("ROLE_USER"));
         }
-    }
-
-    @Override
-    public String getUsername() {
-        return login;
     }
 
     @Override
