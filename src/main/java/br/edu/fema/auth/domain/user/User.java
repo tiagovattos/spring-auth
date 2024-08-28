@@ -25,10 +25,11 @@ public class User implements UserDetails {
     private String email;
     private UserRole role;
 
+    // retorna todas as roles que o usuário possui
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if (this.role == UserRole.ADMIN) {
-            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));  // retorna a role admin e user caso seja um admin
         } else {
             return List.of(new SimpleGrantedAuthority("ROLE_USER"));
         }
@@ -36,21 +37,21 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return UserDetails.super.isAccountNonExpired();
+        return UserDetails.super.isAccountNonExpired(); // default true
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return UserDetails.super.isAccountNonLocked();
+        return UserDetails.super.isAccountNonLocked(); // default true
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return UserDetails.super.isCredentialsNonExpired();
+        return UserDetails.super.isCredentialsNonExpired(); // default true
     }
 
     @Override
     public boolean isEnabled() {
-        return UserDetails.super.isEnabled();
+        return UserDetails.super.isEnabled(); // default true
     }
 }
