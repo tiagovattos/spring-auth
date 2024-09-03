@@ -1,7 +1,11 @@
 package br.edu.fema.auth.domain.user;
 
 import jakarta.persistence.*;
-import lombok.*;
+import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,11 +23,21 @@ import java.util.Objects;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", updatable = false)
     private Long id;
 
+    @Column(name = "username", unique = true, nullable = false)
+    @NotBlank
     private String username;
+
+    @Column(name = "password", nullable = false)
+    @NotBlank
     private String password;
+
+    @Column(name = "email", unique = true, nullable = false)
+    @NotBlank
     private String email;
+
     private UserRole role;
 
     public User(String username, String password, String email, UserRole role) {
